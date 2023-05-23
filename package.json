@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "clean": "rimraf .turbo node_modules dist",
-    "dev": "vite",
+    "dev": "vite --port 3000",
     "build": "pnpm types && vite build",
     "serve": "vite preview",
     "lint": "eslint --max-warnings=0 --cache src tests --ext .ts,.tsx",
@@ -66,5 +66,8 @@
     "typescript": "5.0.4",
     "vite": "4.3.8",
     "vitest": "0.31.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
