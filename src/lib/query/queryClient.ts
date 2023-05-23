@@ -4,8 +4,7 @@ import {
   type QueryFunction,
 } from '@tanstack/react-query'
 
-// @TODO: this should be import.meta.env.DEV?
-const isProd = process.env['NODE_ENV'] === 'production'
+const isProd = !import.meta.env.DEV
 
 export function createQueryClient(
   options: QueryClientConfig & {

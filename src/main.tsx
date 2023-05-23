@@ -1,18 +1,16 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React from 'react'
 import { createRoot } from 'react-dom/client'
+import invariant from 'tiny-invariant'
 import { App } from './App'
 import './index.css'
 
 if (import.meta.env.DEV) {
   const { worker } = await import('./mocks/browser')
-  worker.start({ onUnhandledRequest: 'bypass' })
+  worker.start({ onUnhandledRequest: 'bypass' }).catch(console.error)
 }
 
-const root = createRoot(document.getElementById('root')!)
+const container = document.getElementById('root')
+invariant(container, 'Root element not found')
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const root = createRoot(container)
+
+root.render(<App />)
