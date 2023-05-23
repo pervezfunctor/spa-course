@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@lib": ["src/lib"]
+    },
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,

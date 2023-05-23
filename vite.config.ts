@@ -10,4 +10,9 @@ export default defineConfig({
   test: {
     globals: true,
   },
+  resolve: {
+    alias: {
+      '@lib': '/src/lib',
+    },
+  },
 })
