@@ -2,8 +2,8 @@ import type { Draft } from 'immer'
 import { produce } from 'immer'
 import { useSetAtom } from 'jotai'
 import { atomWithReducer } from 'jotai/utils'
-import type { Handlers } from '../local'
-import { getReducer } from '../local'
+import type { Handlers } from '../local-state'
+import { getReducer } from '../local-state'
 
 export function signalWithReducer<State, Action>(
   initial: State,

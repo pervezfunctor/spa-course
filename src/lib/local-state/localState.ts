@@ -24,13 +24,13 @@ export function getActions<State, Hs extends Handlers<State>>(
   actionCreators: ActionCreators<State, Hs>,
   dispatch: React.Dispatch<ActionsFrom<State, Hs>>,
 ) {
-  const result = {} as any
+  const actions = {} as any
   for (const type of Object.keys(actionCreators)) {
-    result[type] = (...args: any[]) => {
+    actions[type] = (...args: any[]) => {
       dispatch((actionCreators[type] as any)(...args))
     }
   }
-  return result
+  return actions
 }
 
 // @TODO: support many arguments as payload

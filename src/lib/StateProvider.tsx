@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast'
 
 const DefaultErrorFallback: ErrorBoundaryProps['FallbackComponent'] = ({
   error,
-}) => <div>{error.message}</div>
+}) => <div style={{ color: 'red' }}>{error.message}</div>
 
 const DefaultSuspenseFallback = <div>Loading...</div>
 

@@ -6,7 +6,7 @@ import {
   date,
   dateRange,
   defaultValue,
-  int,
+  integer,
   number,
   string,
 } from '../validator'
@@ -35,7 +35,7 @@ export function primitive<Spec extends FieldSpec>(spec: Spec) {
 
 export const useBoolean = primitive(boolean())
 export const useNumber = primitive(number())
-export const useInt = primitive(int())
+export const useInt = primitive(integer())
 export const useDate = primitive(date())
 export const useString = primitive(string())
 export const useDateRange = primitive(dateRange())

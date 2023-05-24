@@ -1,65 +1,45 @@
-/* eslint-disable no-console */
-import { MantineProvider, Title } from '@mantine/core'
-import { useAtomValue, useSetAtom } from 'jotai'
-import { action, computed, signal } from './lib'
+import { Button, Container, Title } from '@mantine/core'
+import React from 'react'
+import { z } from 'zod'
+import { jstr, useInt, useSafeQuery } from '@lib'
 
-const counterAtom = signal({ count: 1 })
-
-const incAtom = action(counterAtom, (_, draft) => {
-  draft.count += 1
+const Post = z.object({
+  userId: z.number(),
+  id: z.number(),
+  title: z.string(),
+  body: z.string(),
 })
 
-const decAtom = action(counterAtom, (_, draft) => {
-  draft.count -= 1
-})
+function useConsoleLog(value: unknown) {
+  // eslint-disable-next-line no-console
+  React.useEffect(() => {
+    jstr(value)
+  })
+}
 
-const squareAtom = computed(get => {
-  const { count } = get(counterAtom)
+const PostView = ({ id }: { id: number }) => {
+  const { data } = useSafeQuery({
+    paths: ['posts', id],
+    spec: Post,
+    keepPreviousData: true,
+  })
 
-  return count % 2 === 0 ? count ** 2 : (count - 1) ** 2
-})
-
-const CounterView = () => {
-  console.log('CounterView')
-  const count = useAtomValue(counterAtom)
+  useConsoleLog('PostView')
 
   return (
-    <div>
-      <span>{count.count}</span>
-    </div>
+    <Container>
+      <Title>{data.title}</Title>
+      <p>{data.body}</p>
+    </Container>
   )
 }
 
-const SquareView = () => {
-  console.log('SquareView')
-  const count = useAtomValue(squareAtom)
-
-  return (
-    <div>
-      <span>{count}</span>
-    </div>
-  )
-}
-
-const CounterButtons = () => {
-  console.log('CounterButtons')
-  const inc = useSetAtom(incAtom)
-  const dec = useSetAtom(decAtom)
-
-  return (
-    <div>
-      <button onClick={inc}>+</button>
-      <button onClick={dec}>-</button>
-    </div>
-  )
-}
 export function App() {
+  const [id, setId] = useInt(1)
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Title align="center">Hello, World!</Title>
-      <CounterView />
-      <SquareView />
-      <CounterButtons />
-    </MantineProvider>
+    <Container>
+      <PostView id={id} />
+      <Button onClick={() => setId(id => id + 1)}>Next</Button>
+    </Container>
   )
 }

@@ -7,7 +7,7 @@ import { z } from 'zod'
 export const number = (defaultValue?: number) =>
   defaultValue ? z.coerce.number().default(defaultValue) : z.coerce.number()
 
-export const int = (defaultValue?: number) =>
+export const integer = (defaultValue?: number) =>
   defaultValue
     ? z.coerce.number().int().default(defaultValue)
     : z.coerce.number().int()
