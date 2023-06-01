@@ -1,7 +1,5 @@
-import { MantineProvider } from '@mantine/core'
+import { ChakraProvider } from '@chakra-ui/react'
 
 export const Wrapper = ({ children }: any) => (
-  <MantineProvider withGlobalStyles withNormalizeCSS>
-    {children}
-  </MantineProvider>
+  <ChakraProvider>{children}</ChakraProvider>
 )

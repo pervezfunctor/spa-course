@@ -1,4 +1,4 @@
-import { MantineProvider } from '@mantine/core'
+import { ChakraProvider } from '@chakra-ui/react'
 import { QueryFunction } from '@tanstack/react-query'
 import { createRoot } from 'react-dom/client'
 import { Toaster, toast } from 'react-hot-toast'
@@ -44,10 +44,10 @@ const queryClient = createQueryClient({
 })
 
 root.render(
-  <MantineProvider withGlobalStyles withNormalizeCSS>
+  <ChakraProvider>
     <StateProvider queryClient={queryClient}>
       <App />
     </StateProvider>
     <Toaster />
-  </MantineProvider>,
+  </ChakraProvider>,
 )
